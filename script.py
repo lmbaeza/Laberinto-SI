@@ -1,12 +1,14 @@
-# References
-# https://www.youtube.com/watch?v=Xjv1sY630Uc
 import time
 import random
+import inspect
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains 
 from screenshot import screen_component_by_id
+
+from image_to_asciify import map_to_ascii
+
 
 # Aquí se utilizará Chrome
 driver = webdriver.Chrome()
@@ -30,12 +32,25 @@ time.sleep(1)
 
 screen_component_by_id(driver=driver, id_name="animation_container", filename="map.png")
 
+map_to_ascii("map.png")
+
+# Cargar Mapa es Ascii
+
+mapa = []
+with open('map.txt') as grid:
+    mapa = grid.read().split('\n')
+
+# Imprir el mapa en la terminal
+for line in mapa:
+    print(line)
+    
+# Lista de Direcciones
 DIRECTIONS = [Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT]
 
 for i in range(100):
     time.sleep(0.5)
+    # Moviemientos aleatorios (Para mostrar la interación con el browser)
     choice = random.choice(DIRECTIONS)
-    # press
     print("PRESS")
     ActionChains(driver).key_down(choice).perform()
     time.sleep(0.3)
