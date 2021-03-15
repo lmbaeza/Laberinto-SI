@@ -1,2 +1,0 @@
-Add grid to a Imagen
-https://stackoverflow.com/questions/20368413/draw-grid-lines-over-an-image-in-matplotlib
