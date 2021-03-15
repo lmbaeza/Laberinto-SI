@@ -1,6 +1,6 @@
 # Laberinto-SI
 
 ```shell
-$ pip install requirements.txt 
+$ pip3 install -r requirements.txt
 $ python script.py
 ```
