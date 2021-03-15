@@ -1,3 +1,7 @@
+# Integrantes:
+# Oscar Andres Mancera Garzon <oamancerag@unal.edu.co>
+# Luis Miguel Baez Aponte <lmbaeza@unal.edu.co>
+
 import time
 import random
 import inspect
