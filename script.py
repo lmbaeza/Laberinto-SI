@@ -4,10 +4,17 @@ import inspect
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains 
-from screenshot import screen_component_by_id
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
+from screenshot import screen_component_by_id
 from image_to_asciify import map_to_ascii
+
+MAP_FILE_NAME = 'map.png'
+MAP_ASCII = 'map.txt'
 
 
 # Aquí se utilizará Chrome
@@ -19,7 +26,7 @@ URL = 'https://www.juegosinfantilespum.com/laberintos-online/12-auto-buhos.php'
 # Abriendo el sitio web
 driver.get(URL)
 
-time.sleep(4)
+time.sleep(5)
 
 # Obtener el botón por el id
 button = driver.find_element_by_id("animation_container")
@@ -30,14 +37,14 @@ print("Click")
 
 time.sleep(1)
 
-screen_component_by_id(driver=driver, id_name="animation_container", filename="map.png")
+screen_component_by_id(driver=driver, id_name="animation_container", filename=MAP_FILE_NAME)
 
-map_to_ascii("map.png")
+map_to_ascii(MAP_FILE_NAME)
 
 # Cargar Mapa es Ascii
 
 mapa = []
-with open('map.txt') as grid:
+with open(MAP_ASCII) as grid:
     mapa = grid.read().split('\n')
 
 # Imprir el mapa en la terminal
