@@ -41,12 +41,13 @@ print("Click")
 
 time.sleep(1)
 
+# Tomar screemshot del mapa
 screen_component_by_id(driver=driver, id_name="animation_container", filename=MAP_FILE_NAME)
 
+# Pasar screemshot del mapa a ascii
 map_to_ascii(MAP_FILE_NAME)
 
 # Cargar Mapa es Ascii
-
 mapa = []
 with open(MAP_ASCII) as grid:
     mapa = grid.read().split('\n')
@@ -63,9 +64,11 @@ for i in range(100):
     # Moviemientos aleatorios (Para mostrar la interación con el browser)
     choice = random.choice(DIRECTIONS)
     print("PRESS")
+    # Selecionar Tecla
     ActionChains(driver).key_down(choice).perform()
     time.sleep(0.3)
-    # stop pressing
+    # Parar Seleción
     ActionChains(driver).key_up(choice).perform()
 
+# Cerrar el Navegador
 driver.close()
