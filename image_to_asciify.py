@@ -39,6 +39,57 @@ def do(image, new_width=DIMENSION):
 
     return '\n'.join(new_image)
 
+def find_coordenate(target_char, grid, n, m):
+    maximum_width = 0
+    maximum_height = 0
+    first_x = None
+    first_y = None
+    for i in range(n):
+        count_width = 0
+        count_height = 0
+        for j in range(m):
+            if grid[i][j] == target_char:
+                count_width += 1
+                count_height = 1
+                if first_x is None:
+                    first_x = i
+                    first_y = j
+            else:
+                count_width = 0
+            maximum_width = max(maximum_width, count_width)
+        maximum_height += count_height
+    
+    start_x = first_x + maximum_height // 2
+    start_y = first_y + maximum_width // 2
+    return start_x, start_y
+
+def add_start_end(grid):
+    grid = grid.split('\n')
+    n = len(grid)
+    m = len(grid[0])
+
+    
+    startA_x, startA_y = find_coordenate('@', grid, n, m)
+    startB_x, startB_y = find_coordenate('X', grid, n, m)
+
+    for i in range(n):
+        for j in range(m):
+            if i==startA_x and j==startA_y:
+                row = []
+                row[:0] = grid[i]
+                row[j] = 'A'
+                grid[i] = ''.join(row)
+            elif i==startB_x and j==startB_y:
+                row = []
+                row[:0] = grid[i]
+                row[j] = 'B'
+                grid[i] = ''.join(row)
+                
+    
+    grid = '\n'.join(grid)
+    grid = str(n) + ' ' + str(m) + '\n' + grid
+    return grid
+
 def map_to_ascii(path):
     image = None
     try:
@@ -47,6 +98,9 @@ def map_to_ascii(path):
         print("Unable to find image in", path)
         return
     image = do(image)
+
+    image = add_start_end(image)
+
     print(image)
     f = open('map.txt','w')
     f.write(image)

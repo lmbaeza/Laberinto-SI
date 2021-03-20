@@ -5,9 +5,6 @@ import numpy as np
 
 from image_to_asciify import map_to_ascii
 
-LEVEL = 2
-FOLDER = "level-"+str(LEVEL)
-
 method = cv2.TM_SQDIFF_NORMED
 
 SERIALIZED_MAP = 'img/serialized-map.png'
@@ -39,20 +36,20 @@ def run_levels(level, map_image):
     green = (255, 0, 0)
 
     if level == 1:
-        buho1_image = cv2.imread(FOLDER + '/buho-1.png')
-        buho2_image = cv2.imread(FOLDER + '/buho-2.png')
-        buho3_image = cv2.imread(FOLDER + '/buho-3.png')
+        buho1_image = cv2.imread('level-' + str(level) + '/buho-1.png')
+        buho2_image = cv2.imread('level-' + str(level) + '/buho-2.png')
+        buho3_image = cv2.imread('level-' + str(level) + '/buho-3.png')
         identify_object(home_image, map_image, red)
         identify_object(car_image, map_image, blue)
         identify_object(buho1_image, map_image, green)
         identify_object(buho2_image, map_image, green)
         identify_object(buho3_image, map_image, green)
     elif level == 2:
-        buho1_image = cv2.imread(FOLDER + '/buho-1.png')
-        buho2_image = cv2.imread(FOLDER + '/buho-2.png')
-        buho3_image = cv2.imread(FOLDER + '/buho-3.png')
-        buho4_image = cv2.imread(FOLDER + '/buho-4.png')
-        buho5_image = cv2.imread(FOLDER + '/buho-5.png')
+        buho1_image = cv2.imread('level-' + str(level) + '/buho-1.png')
+        buho2_image = cv2.imread('level-' + str(level) + '/buho-2.png')
+        buho3_image = cv2.imread('level-' + str(level) + '/buho-3.png')
+        buho4_image = cv2.imread('level-' + str(level) + '/buho-4.png')
+        buho5_image = cv2.imread('level-' + str(level) + '/buho-5.png')
         identify_object(home_image, map_image, red)
         identify_object(car_image, map_image, blue)
         identify_object(buho1_image, map_image, green)
@@ -61,12 +58,12 @@ def run_levels(level, map_image):
         identify_object(buho4_image, map_image, green)
         identify_object(buho5_image, map_image, green)
     elif level == 3:
-        buho1_image = cv2.imread(FOLDER + '/buho-1.png')
-        buho2_image = cv2.imread(FOLDER + '/buho-2.png')
-        buho3_image = cv2.imread(FOLDER + '/buho-3.png')
-        buho4_image = cv2.imread(FOLDER + '/buho-4.png')
-        buho5_image = cv2.imread(FOLDER + '/buho-5.png')
-        buho6_image = cv2.imread(FOLDER + '/buho-6.png')
+        buho1_image = cv2.imread('level-' + str(level) + '/buho-1.png')
+        buho2_image = cv2.imread('level-' + str(level) + '/buho-2.png')
+        buho3_image = cv2.imread('level-' + str(level) + '/buho-3.png')
+        buho4_image = cv2.imread('level-' + str(level) + '/buho-4.png')
+        buho5_image = cv2.imread('level-' + str(level) + '/buho-5.png')
+        buho6_image = cv2.imread('level-' + str(level) + '/buho-6.png')
         identify_object(home_image, map_image, red)
         identify_object(car_image, map_image, blue)
         identify_object(buho1_image, map_image, green)
@@ -96,19 +93,20 @@ def serialized(path):
                 pixels[i, j] = black
             
     img.save(path)
-    
 
-map_image = cv2.imread('img/map-' + str(LEVEL) + '.png')
+def run_map_processing(level):    
 
-run_levels(LEVEL, map_image)
+    map_image = cv2.imread('img/map-' + str(level) + '.png')
 
-# Display the original image with the rectangle around the match.
-# cv2.imshow('output', map_image)
+    run_levels(level, map_image)
 
-cv2.imwrite(SERIALIZED_MAP, map_image)
-# The image is only displayed if we call this
+    # Display the original image with the rectangle around the match.
+    # cv2.imshow('output', map_image)
 
-serialized(SERIALIZED_MAP)
+    cv2.imwrite(SERIALIZED_MAP, map_image)
+    # The image is only displayed if we call this
 
-map_to_ascii(SERIALIZED_MAP)
-# cv2.waitKey(0)
+    serialized(SERIALIZED_MAP)
+
+    map_to_ascii(SERIALIZED_MAP)
+    # cv2.waitKey(0)
