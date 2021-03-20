@@ -10,7 +10,7 @@ FOLDER = "level-"+str(LEVEL)
 
 method = cv2.TM_SQDIFF_NORMED
 
-SERIALIZED_MAP = 'serialized-map.png'
+SERIALIZED_MAP = 'img/serialized-map.png'
 
 def identify_object(small_image, map_image, color):
     result = cv2.matchTemplate(small_image, map_image, method)
@@ -30,8 +30,8 @@ def identify_object(small_image, map_image, color):
 
 def run_levels(level, map_image):
     # Read the images from the file
-    home_image = cv2.imread('home.png')
-    car_image = cv2.imread('car.png')
+    home_image = cv2.imread('img/home.png')
+    car_image = cv2.imread('img/car.png')
 
     # RGB Colors
     blue = (0, 255, 0)
@@ -98,7 +98,7 @@ def serialized(path):
     img.save(path)
     
 
-map_image = cv2.imread('map-' + str(LEVEL) + '.png')
+map_image = cv2.imread('img/map-' + str(LEVEL) + '.png')
 
 run_levels(LEVEL, map_image)
 
