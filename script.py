@@ -23,7 +23,7 @@ level = 1
 
 MAP_FILE_NAME = 'img/map-' + str(level) + '.png'
 SERIALIZED_MAP_PATH = 'img/serialized-map.png'
-MAP_ASCII = 'map.txt'
+MAP_ASCII = 'ascii/map.txt'
 
 # Aquí se utilizará Chrome
 driver = webdriver.Chrome()
@@ -61,30 +61,36 @@ DIRECTIONS = [Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT]
 for direction in path:
     time.sleep(0.5)
 
-    milliseconds = 0.085
+    # milliseconds = 0.084
+    milliseconds = 0.160
+    eps = 0.025
 
     if direction == 'U':
+        print("Press UP")
         # Selecionar Tecla
         ActionChains(driver).key_down(DIRECTIONS[0]).perform()
         time.sleep(milliseconds)
         # Parar Seleción
         ActionChains(driver).key_up(DIRECTIONS[0]).perform()
     elif direction == 'D':
+        print("Press DOWN")
         # Selecionar Tecla
         ActionChains(driver).key_down(DIRECTIONS[1]).perform()
         time.sleep(milliseconds)
         # Parar Seleción
         ActionChains(driver).key_up(DIRECTIONS[1]).perform()
     elif direction == 'L':
+        print("Press LEFT")
         # Selecionar Tecla
         ActionChains(driver).key_down(DIRECTIONS[2]).perform()
-        time.sleep(milliseconds)
+        time.sleep(milliseconds-eps)
         # Parar Seleción
         ActionChains(driver).key_up(DIRECTIONS[2]).perform()
     elif direction == 'R':
+        print("Press RIGHT")
         # Selecionar Tecla
         ActionChains(driver).key_down(DIRECTIONS[3]).perform()
-        time.sleep(milliseconds)
+        time.sleep(milliseconds-eps)
         # Parar Seleción
         ActionChains(driver).key_up(DIRECTIONS[3]).perform()
 

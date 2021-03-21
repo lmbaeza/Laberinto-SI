@@ -59,8 +59,8 @@ def find_coordenate(target_char, grid, n, m):
             maximum_width = max(maximum_width, count_width)
         maximum_height += count_height
     
-    start_x = first_x + maximum_height // 2
-    start_y = first_y + maximum_width // 2
+    start_x = first_x + (maximum_height // 2) - int(maximum_height%2!=0)
+    start_y = first_y + (maximum_width // 2) - int(maximum_width%2!=0)
     return start_x, start_y
 
 def add_start_end(grid):
@@ -102,6 +102,6 @@ def map_to_ascii(path):
     image = add_start_end(image)
 
     print(image)
-    f = open('map.txt','w')
+    f = open('ascii/map.txt','w')
     f.write(image)
     f.close()

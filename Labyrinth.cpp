@@ -121,7 +121,7 @@ private:
             cout << path << endl;
             return;
         } else {
-            cout << "NO" << endl;
+            cout << "0 0\nNO" << endl;
         }
     }
 

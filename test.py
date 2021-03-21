@@ -11,6 +11,6 @@ level = 1
 
 MAP_FILE_NAME = 'img/map-' + str(level) + '.png'
 SERIALIZED_MAP_PATH = 'img/serialized-map.png'
-MAP_ASCII = 'map.txt'
+MAP_ASCII = 'ascii/map.txt'
 
 run_map_processing(level=level)
