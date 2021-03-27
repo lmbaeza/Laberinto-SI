@@ -16,10 +16,14 @@ from selenium.common.exceptions import TimeoutException
 
 from screenshot import screen_component_by_id
 from image_to_asciify import map_to_ascii
+from image_map_processing import run_map_processing
+from get_path import get_path
 
-MAP_FILE_NAME = 'map.png'
-MAP_ASCII = 'map.txt'
+level = 1
 
+MAP_FILE_NAME = 'img/map-' + str(level) + '.png'
+SERIALIZED_MAP_PATH = 'img/serialized-map.png'
+MAP_ASCII = 'ascii/map.txt'
 
 # Aquí se utilizará Chrome
 driver = webdriver.Chrome()
@@ -44,31 +48,51 @@ time.sleep(1)
 # Tomar screemshot del mapa
 screen_component_by_id(driver=driver, id_name="animation_container", filename=MAP_FILE_NAME)
 
-# Pasar screemshot del mapa a ascii
-map_to_ascii(MAP_FILE_NAME)
+# Procesar la Imagen
+run_map_processing(level=level)
 
-# Cargar Mapa es Ascii
-mapa = []
-with open(MAP_ASCII) as grid:
-    mapa = grid.read().split('\n')
+path = get_path()
 
-# Imprir el mapa en la terminal
-for line in mapa:
-    print(line)
-    
+print('path : ', path)
+
 # Lista de Direcciones
 DIRECTIONS = [Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT]
 
-for i in range(100):
+for direction in path:
     time.sleep(0.5)
-    # Moviemientos aleatorios (Para mostrar la interación con el browser)
-    choice = random.choice(DIRECTIONS)
-    print("PRESS")
-    # Selecionar Tecla
-    ActionChains(driver).key_down(choice).perform()
-    time.sleep(0.3)
-    # Parar Seleción
-    ActionChains(driver).key_up(choice).perform()
+
+    # milliseconds = 0.084
+    milliseconds = 0.160
+    eps = 0.025
+
+    if direction == 'U':
+        print("Press UP")
+        # Selecionar Tecla
+        ActionChains(driver).key_down(DIRECTIONS[0]).perform()
+        time.sleep(milliseconds)
+        # Parar Seleción
+        ActionChains(driver).key_up(DIRECTIONS[0]).perform()
+    elif direction == 'D':
+        print("Press DOWN")
+        # Selecionar Tecla
+        ActionChains(driver).key_down(DIRECTIONS[1]).perform()
+        time.sleep(milliseconds)
+        # Parar Seleción
+        ActionChains(driver).key_up(DIRECTIONS[1]).perform()
+    elif direction == 'L':
+        print("Press LEFT")
+        # Selecionar Tecla
+        ActionChains(driver).key_down(DIRECTIONS[2]).perform()
+        time.sleep(milliseconds-eps)
+        # Parar Seleción
+        ActionChains(driver).key_up(DIRECTIONS[2]).perform()
+    elif direction == 'R':
+        print("Press RIGHT")
+        # Selecionar Tecla
+        ActionChains(driver).key_down(DIRECTIONS[3]).perform()
+        time.sleep(milliseconds-eps)
+        # Parar Seleción
+        ActionChains(driver).key_up(DIRECTIONS[3]).perform()
 
 # Cerrar el Navegador
 driver.close()
