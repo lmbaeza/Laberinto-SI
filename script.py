@@ -45,54 +45,57 @@ print("Click")
 
 time.sleep(1)
 
-# Tomar screemshot del mapa
-screen_component_by_id(driver=driver, id_name="animation_container", filename=MAP_FILE_NAME)
+ask = input("Desea empezar a ejecutar el Bot? [S/N]: ")
 
-# Procesar la Imagen
-run_map_processing(level=level)
+if ask == 'S' or ask == 's':
+    # Tomar screemshot del mapa
+    screen_component_by_id(driver=driver, id_name="animation_container", filename=MAP_FILE_NAME)
 
-path = get_path()
+    # Procesar la Imagen
+    run_map_processing(level=level)
 
-print('path : ', path)
+    path = get_path()
 
-# Lista de Direcciones
-DIRECTIONS = [Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT]
+    print('path : ', path)
 
-for direction in path:
-    time.sleep(0.5)
+    # Lista de Direcciones
+    DIRECTIONS = [Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT]
 
-    # milliseconds = 0.084
-    milliseconds = 0.160
-    eps = 0.025
+    for direction in path:
+        time.sleep(0.5)
 
-    if direction == 'U':
-        print("Press UP")
-        # Selecionar Tecla
-        ActionChains(driver).key_down(DIRECTIONS[0]).perform()
-        time.sleep(milliseconds)
-        # Parar Seleción
-        ActionChains(driver).key_up(DIRECTIONS[0]).perform()
-    elif direction == 'D':
-        print("Press DOWN")
-        # Selecionar Tecla
-        ActionChains(driver).key_down(DIRECTIONS[1]).perform()
-        time.sleep(milliseconds)
-        # Parar Seleción
-        ActionChains(driver).key_up(DIRECTIONS[1]).perform()
-    elif direction == 'L':
-        print("Press LEFT")
-        # Selecionar Tecla
-        ActionChains(driver).key_down(DIRECTIONS[2]).perform()
-        time.sleep(milliseconds-eps)
-        # Parar Seleción
-        ActionChains(driver).key_up(DIRECTIONS[2]).perform()
-    elif direction == 'R':
-        print("Press RIGHT")
-        # Selecionar Tecla
-        ActionChains(driver).key_down(DIRECTIONS[3]).perform()
-        time.sleep(milliseconds-eps)
-        # Parar Seleción
-        ActionChains(driver).key_up(DIRECTIONS[3]).perform()
+        # milliseconds = 0.084
+        milliseconds = 0.160
+        eps = 0.025
+
+        if direction == 'U':
+            print("Press UP")
+            # Selecionar Tecla
+            ActionChains(driver).key_down(DIRECTIONS[0]).perform()
+            time.sleep(milliseconds)
+            # Parar Seleción
+            ActionChains(driver).key_up(DIRECTIONS[0]).perform()
+        elif direction == 'D':
+            print("Press DOWN")
+            # Selecionar Tecla
+            ActionChains(driver).key_down(DIRECTIONS[1]).perform()
+            time.sleep(milliseconds)
+            # Parar Seleción
+            ActionChains(driver).key_up(DIRECTIONS[1]).perform()
+        elif direction == 'L':
+            print("Press LEFT")
+            # Selecionar Tecla
+            ActionChains(driver).key_down(DIRECTIONS[2]).perform()
+            time.sleep(milliseconds-eps)
+            # Parar Seleción
+            ActionChains(driver).key_up(DIRECTIONS[2]).perform()
+        elif direction == 'R':
+            print("Press RIGHT")
+            # Selecionar Tecla
+            ActionChains(driver).key_down(DIRECTIONS[3]).perform()
+            time.sleep(milliseconds-eps)
+            # Parar Seleción
+            ActionChains(driver).key_up(DIRECTIONS[3]).perform()
 
 # Cerrar el Navegador
 driver.close()
