@@ -19,7 +19,7 @@ from image_to_asciify import map_to_ascii
 from image_map_processing import run_map_processing
 from get_path import get_path
 
-level = 3
+level = 1
 
 MAP_FILE_NAME = 'img/map-' + str(level) + '.png'
 SERIALIZED_MAP_PATH = 'img/serialized-map.png'
