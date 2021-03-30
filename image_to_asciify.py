@@ -1,16 +1,29 @@
 from PIL import Image
 
+# [@] Representa la localización del carro
+# [X] Representa la localización de la casa
+# [#] Representa la localizacion del muro
+# [.] Representa la localización de la carretera
+
 ASCII_CHARS = [
-    '#','#','#','#','#','#','#','.','#','#','3',
-    '#','#','#','#','#','#','#','#','#','#','3',
+    '#','#','#','#','#','#','#','.','#','#','#',
+    '#','#','#','#','#','#','#','#','#','#','#',
     '#','#','#','@', '#', '#', '#', '#', '#', '#',
     '#', '#', '#', '#', '#', 'X', '#', '#', '#', '#',
     '#', '#', '#', '#', '#', '#', '#', '#'
 ]
 
+# ASCII_CHARS = [
+#     '1','2','3','4','5','6','7','.','9','0', 'Q',
+#     'W','E','R','T','Y','Y','U','I','O','P','A',
+#     'S','D','F','G', 'H', 'I', 'J', 'K', 'L', 'Ñ',
+#     'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '+', '-',
+#     '#', '@', '$', '%', '&', '/', '(', '*'
+# ]
+
 ASCII_CHARS = ASCII_CHARS[::-1]
 
-DIMENSION = 100
+DIMENSION = 45
 
 def resize(image, new_width=DIMENSION):
     (old_width, old_height) = image.size
@@ -59,8 +72,8 @@ def find_coordenate(target_char, grid, n, m):
             maximum_width = max(maximum_width, count_width)
         maximum_height += count_height
     
-    start_x = first_x + (maximum_height // 2) - int(maximum_height%2!=0)
-    start_y = first_y + (maximum_width // 2) - int(maximum_width%2!=0)
+    start_x = first_x + (maximum_height // 2) # - int(maximum_height%2!=0)
+    start_y = first_y + (maximum_width // 2) # - int(maximum_width%2!=0) + 1
     return start_x, start_y
 
 def add_start_end(grid):
