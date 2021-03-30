@@ -2,7 +2,7 @@ import sys
 import os
 import platform
 
-def get_path():
+def get_path(level):
     
     if platform.system() == 'Linux' or platform.system() == 'Darwin':
         # Comandos para Linux y Mac
@@ -18,8 +18,4 @@ def get_path():
     with open('ascii/path.txt', 'r') as reader:
         path += reader.read()
     
-    path = path.replace('DD', 'D')
-    path = path.replace('UU', 'U')
-    path = path.replace('LL', 'L')
-    path = path.replace('RR', 'R')
     return path
