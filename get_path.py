@@ -18,4 +18,7 @@ def get_path(level):
     with open('ascii/path.txt', 'r') as reader:
         path += reader.read()
     
+    if level == 3:
+        path = path[0] + path
+    
     return path
