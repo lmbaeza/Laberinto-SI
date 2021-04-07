@@ -50,19 +50,19 @@ class Agent:
             eps_down = 0.0
         elif self.level == 2:
             milliseconds = 0.18
-            eps_right = 0.04
-            eps_left = 0.04
+            eps_right = 0.026
+            eps_left = 0.026
             eps_up = 0.0
             eps_down = 0.0
         elif self.level == 3:
             milliseconds = 0.18
-            eps_right = 0.04
-            eps_left = 0.04
+            eps_right = 0.03
+            eps_left = 0.03
             eps_up = -0.04
             eps_down = -0.04
 
         for direction in self.path:
-            time.sleep(0.5)
+            time.sleep(0.4)
 
             if direction == 'U':
                 print("Press UP")
